@@ -1,118 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import * as React from 'react';
+import { useEffect, useRef } from 'react';
+import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { enableScreens } from 'react-native-screens';
+import Home from './src/screens/HomeScreen';
+import SpeakOutSplit from './src/screens/SpeakOutSplitScreen';
+import BoxBreathing from './src/screens/BoxBreathingScreen';
+import NumbersTechnique from './src/screens/NumbersTechniqueScreen';
+import SingleObject from './src/screens/SingleObjectScreen';
+import SpeakOutPositive from './src/screens/SpeakOutPositiveScreen';
+import SpeakOutNegative from './src/screens/SpeakOutNegativeScreen';
+import Settings from './src/screens/SettingsScreen';
+import Notifications from './src/screens/NotificationsScreen';
+import VideoScreen from './src/screens/VideoScreen';
+import { Platform } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+enableScreens();
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Stack = createStackNavigator();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+function App() {
+  const navigationRef = useRef<NavigationContainerRef<any>>(null);
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+    if (Platform.OS === 'android')
+    SplashScreen.hide();
+  }, [])
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SpeakOutSplit" component={SpeakOutSplit} />
+        <Stack.Screen name="SpeakOutPositive" component={SpeakOutPositive} />
+        <Stack.Screen name="SpeakOutNegative" component={SpeakOutNegative} />
+        <Stack.Screen name="BoxBreathing" component={BoxBreathing} />
+        <Stack.Screen name="NumbersTechnique" component={NumbersTechnique} />
+        <Stack.Screen name="SingleObject" component={SingleObject} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Notifications" component={Notifications}/>
+        <Stack.Screen name="VideoScreen" component={VideoScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
