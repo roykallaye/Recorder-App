@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
 import DynamicWaveform from '../components/DynamicWaveform';
-import GlobalStyles from '../../GlobalStyles';
+import GlobalStyles from '../constants/GlobalStyles';
 
 const { width, height } = Dimensions.get('window');
 

@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
-import GlobalStyles from '../../GlobalStyles';
+import GlobalStyles from '../constants/GlobalStyles';
 
 // Get device width and height
 const { width, height } = Dimensions.get('window');

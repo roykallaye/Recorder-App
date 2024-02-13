@@ -4,7 +4,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import GlobalStyles from '../../GlobalStyles';
+import GlobalStyles from '../constants/GlobalStyles';
 
 const Home = () => {
     const navigation = useNavigation();

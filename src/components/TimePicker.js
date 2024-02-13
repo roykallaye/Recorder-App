@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet, Dimensions } from 'react-native';
-import GlobalStyles from '../../GlobalStyles';
+import GlobalStyles from '../constants/GlobalStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');

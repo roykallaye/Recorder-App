@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import Video from 'react-native-video';
-import GlobalStyles from '../../GlobalStyles';
+import VideoPlayer from 'react-native-video-controls';
+import GlobalStyles from '../constants/GlobalStyles';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,14 +14,7 @@ const scaleSize = (size) => size * (width / 375);
 const scaleHeight = (size) => size * (height / 667);
 
 const VideoScreen = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const navigation = useNavigation();
-  const videoRef = useRef(null);
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-    console.log('pressed play');
-  };
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
@@ -35,20 +28,15 @@ const VideoScreen = () => {
 
       <View style={styles.separatorLine} />
 
-      <TouchableOpacity activeOpacity={GlobalStyles.activeOpacity} onPress={togglePlay} style={styles.videoContainer}>
-        <Video
-          ref={videoRef}
-          source={{ uri: 'https://customer-l9k8ksax2dn0u08o.cloudflarestream.com/7afdbd9b43dfa92721b596a1fd523cfb/iframe?poste[…]ails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600' }}
+      <View style={styles.videoContainer}>
+        <VideoPlayer
+          source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' }}
           style={styles.video}
-          paused={!isPlaying}
           resizeMode="cover"
+          onBack={() => navigation.goBack()}
+          onError={(e) => console.log(e)}
         />
-        {!isPlaying && (
-          <View style={styles.overlay}>
-            <Icon name="play-circle" size={100} color={GlobalStyles.backgroundColor} />
-          </View>
-        )}
-      </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

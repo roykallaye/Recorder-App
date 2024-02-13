@@ -1,96 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, Platform, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StatusBar, StyleSheet, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import TimePicker from '../components/TimePicker';
-import GlobalStyles from '../../GlobalStyles';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import GlobalStyles from '../constants/GlobalStyles';
 
 const { width, height } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
-
 const scaleSize = (size) => size * (width / 375);
+const scaleHeight = (size) => size * (height / 667);
 
 const Notifications = () => {
     const navigation = useNavigation();
     const [isNotificationOn, setIsNotificationOn] = useState(false);
-    const [selectedTime, setSelectedTime] = useState({ hours: 12, minutes: 0, dayPart: 'AM' });
-    const [isPickerShow, setIsPickerShow] = useState(false);
-    const [showSelectTimeText, setShowSelectTimeText] = useState(true);
-    
-    useEffect(() => {
-        console.log(formatTime(selectedTime))
-    }, [selectedTime])
-
-    const formatTime = (time) => {
-        const hours = time.hours < 10 ? `0${time.hours}` : `${time.hours}`;
-        const minutes = time.minutes < 10 ? `0${time.minutes}` : `${time.minutes}`;
-        return `${hours}:${minutes}${time.dayPart}`
-    }
+    const [showTimePicker, setShowTimePicker] = useState(false);
+    const [selectedTime, setSelectedTime] = useState(null);
 
     const toggleNotification = (newState) => {
         setIsNotificationOn(newState);
         if (!newState) {
-            setShowSelectTimeText(true);
+            setShowTimePicker(false);
+            setSelectedTime(null);
         }
     };
 
-    const convertToDateTime = (time) => {
-        console.log('converttodatetime executed');
-        const date = new Date();
-        let hours = time.hours;
-        if (time.dayPart === 'PM' && hours < 12) {
-            hours += 12;
-        } else if (time.dayPart === 'AM' && hours === 12) {
-            hours = 0;
-        }
-        date.setHours(hours);
-        date.setMinutes(time.minutes);
-        console.log('returning date:', date);
-        return date;
+    const toggleTimePicker = () => {
+        setShowTimePicker(!showTimePicker);
     };
 
-    const convertFromDateTime = (date) => {
-        let hours = date.getHours();
-        const minutes = date.getMinutes();
-        const dayPart = hours >= 12 ? 'PM' : 'AM';
-        if (hours > 12) {
-            hours -= 12;
-        } else if (hours === 0) {
-            hours = 12;
-        }
-        return { hours, minutes, dayPart };
-    };
-
-    const onChange = (event, selectedDate) => {
-        console.log('onChange executed');
-        setShowSelectTimeText(false);
+    const onTimeChange = (event, selectedDate) => {
+        setShowTimePicker(Platform.OS === 'ios');
         if (selectedDate) {
-            const newTime = convertFromDateTime(selectedDate);
-            setSelectedTime(newTime);
-        } else {
-            console.log('No date selected');
-        }
-        if (Platform.OS === 'ios') {
-            setIsPickerShow(false);
+            setSelectedTime(selectedDate);
         }
     };
 
-    const showPicker = () => {
-        console.log('show picker executed');
-        if (Platform.OS === 'android') {
-            DateTimePickerAndroid.open({
-                value: convertToDateTime(selectedTime),
-                change: onChange,
-                mode: 'time',
-                is24Hour: false,
-            });
-        } else {
-            setIsPickerShow(true);
-        }
-    };
+    const displayTimeText = () => selectedTime ? selectedTime.toLocaleTimeString() : 'Select time';
 
     return (
         <SafeAreaView style={styles.SafeAreaView}>
@@ -106,17 +53,18 @@ const Notifications = () => {
             
             {/* Toggle and Time Picker Section */}
             <View style={styles.toggleNotification}>
-                <Text style={styles.toggleNotificationText}>Set notification time</Text>
+                <Text style={styles.toggleNotificationText}>Notification</Text>
                 <View style={styles.toggleButtonsView}>
-                <TouchableOpacity onPress={() => toggleNotification(true)}>
-                    <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor }}>ON </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => toggleNotification(false)}>
-                    <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.grayOutColor : GlobalStyles.primaryColor }}> OFF</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => toggleNotification(true)}>
+                        <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor }}>ON </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => toggleNotification(false)}>
+                        <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.grayOutColor : GlobalStyles.primaryColor }}> OFF</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
+            {/* Separator line */}
             <View style={styles.separatorLine} />
             
             {/* Description */}
@@ -126,38 +74,36 @@ const Notifications = () => {
                 </Text>
             </View>
             
-            <View style={styles.timePickerView}>
-                <Text style={{ color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor, fontSize: GlobalStyles.internalTextFontSize, marginTop: 15, textAlign: 'justify' }}>Select notification time</Text>
-            </View>
-
-            {/* Time Picker */}
-            {isNotificationOn && !showSelectTimeText && (
-            <TouchableOpacity onPress={showPicker} >
+            {/* Select time button */}
+            {isNotificationOn && (
                 <View>
-                    <TimePicker selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-                </View>
-            </TouchableOpacity>
-            )}
+                    <View style={styles.timePickerView}>
+                        <Text style={styles.timePickerText}>Set notification time</Text>
+                        <TouchableOpacity onPress={() => setShowTimePicker(true)} style={styles.timePickerButtonBorder} >
+                            <Text style={styles.timePickerText}>{displayTimeText()}</Text>
+                        </TouchableOpacity>
+                        {showTimePicker && (
+                            <DateTimePicker
+                                value={selectedTime || new Date()}
+                                mode="time"
+                                display={Platform.OS === 'android' ? 'spinner' : 'default'}
+                                onChange={onTimeChange}
+                                onTouchCancel={() => setShowTimePicker(false)} // For iOS, to handle cancel
+                            />
+                        )}
+                    </View>
 
-            {isNotificationOn && showSelectTimeText && (
-            <View>
-                <View style={styles.timePickerButtonView}>
-                    <TouchableOpacity onPress={showPicker} style={styles.timePickerButtonBorder}>
-                            <Text style={styles.timePickerText}>Select time</Text>
+                    {/* Done button */}
+                    <TouchableOpacity
+                        style={styles.doneButton}
+                        onPress={() => {
+                            navigation.navigate('Settings', { isNotificationOn: isNotificationOn });
+                        }}>
+                        <View style={styles.doneButtonView}>
+                            <Text style={styles.donebuttonText}>Done</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
-            
-                {/* Done button */}
-                <TouchableOpacity
-                    style={styles.doneButton}
-                    onPress={() => {
-                        navigation.navigate('Settings', { isNotificationOn: isNotificationOn });
-                    }}>
-                    <View style={styles.doneButtonView}>
-                        <Text style={styles.donebuttonText}>Done</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
             )}
         </SafeAreaView>
     );
@@ -216,9 +162,10 @@ const styles = StyleSheet.create({
         borderColor: GlobalStyles.primaryColor,
         borderWidth: 1,
         borderRadius: GlobalStyles.borderRadiusSmall,
-        paddingHorizontal: width * 0.1,
+        paddingHorizontal: width * 0.06,
         paddingVertical: scaleSize(10),
-        alignItems: 'center',
+        top: scaleHeight(50),
+        right: scaleSize(87.75)
     },
     timePickerButtonView: {
         alignItems: 'center',

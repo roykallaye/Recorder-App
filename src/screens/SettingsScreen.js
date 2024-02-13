@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StatusBar, StyleSheet, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import GlobalStyles from '../../GlobalStyles';
+import GlobalStyles from '../constants/GlobalStyles';
 
 // Get device width and height
 const { width, height } = Dimensions.get('window');
