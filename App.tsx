@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import checkAndRequestExactAlarmPermission from './src/components/permissionFunction';
 import { enableScreens } from 'react-native-screens';
 import Home from './src/screens/HomeScreen';
 import SpeakOutSplit from './src/screens/SpeakOutSplitScreen';

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, StyleSheet, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StatusBar, StyleSheet, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { notificationService } from '../components/NotificationService';
 import GlobalStyles from '../constants/GlobalStyles';
 
 const { width, height } = Dimensions.get('window');
@@ -18,22 +20,54 @@ const Notifications = () => {
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [selectedTime, setSelectedTime] = useState(null);
 
-    const toggleNotification = (newState) => {
+    useEffect(() => {
+        const loadSettings = async () => {
+            const savedNotificationState = await AsyncStorage.getItem('isNotificationOn');
+            const savedTime = await AsyncStorage.getItem('selectedTime');
+    
+            setIsNotificationOn(savedNotificationState === 'true');
+            if (savedTime) {
+                setSelectedTime(new Date(savedTime));
+            }
+        };
+    
+        loadSettings();
+    }, []);
+
+    const toggleNotification = async (newState) => {
         setIsNotificationOn(newState);
-        if (!newState) {
+        if (newState) {
+            // Check and request permissions only if the newState is true (i.e., turning notifications ON)
+            const permissionGranted = await notificationService.checkAndRequestPermissions();
+            if (permissionGranted) {
+                // Only proceed with enabling notifications if permissions are granted
+                await AsyncStorage.setItem('isNotificationOn', 'true');
+                setShowTimePicker(true);
+                // If there's already a selected time, we could directly schedule the notification here as well
+                if (selectedTime) {
+                    // Assuming you have a method to schedule the notification at the selected time
+                    notificationService.scheduleNotification(selectedTime.getHours(), selectedTime.getMinutes());
+                }
+            } else {
+                // If permission is not granted, do not turn notifications on
+                console.log("Permission not granted for notifications.");
+                setIsNotificationOn(false); // Optionally revert the notification toggle switch to off
+                return; // Exit the function early
+            }
+        } else {
+            // If turning notifications OFF, proceed with your existing logic
+            await AsyncStorage.setItem('isNotificationOn', 'false');
             setShowTimePicker(false);
             setSelectedTime(null);
+            await AsyncStorage.removeItem('selectedTime');
         }
-    };
-
-    const toggleTimePicker = () => {
-        setShowTimePicker(!showTimePicker);
-    };
+    };    
 
     const onTimeChange = (event, selectedDate) => {
         setShowTimePicker(Platform.OS === 'ios');
         if (selectedDate) {
             setSelectedTime(selectedDate);
+            AsyncStorage.setItem('selectedTime', selectedDate.toString());
         }
     };
 
@@ -96,8 +130,26 @@ const Notifications = () => {
                     {/* Done button */}
                     <TouchableOpacity
                         style={styles.doneButton}
-                        onPress={() => {
-                            navigation.navigate('Settings', { isNotificationOn: isNotificationOn });
+                        onPress={async () => {
+                            if (isNotificationOn && selectedTime) {
+                                // Save the notification state as 'ON' and the selected time
+                                await AsyncStorage.setItem('isNotificationOn', 'true');
+                                await AsyncStorage.setItem('selectedTime', selectedTime.toISOString()); // Save the selected time as a string
+                                console.log(selectedTime.toISOString());
+
+                                // Extract hour and minute from selectedTime and schedule the notification
+                                const hour = selectedTime.getHours();
+                                const minute = selectedTime.getMinutes();
+                                console.log('hour:', hour, '    minute:', minute);
+                                notificationService.scheduleNotification(hour, minute);
+                            }
+                            // Navigate back to the Settings screen
+                            navigation.navigate('Settings');
+                            // Optionally pass back the updated state if you plan to use it there
+                            // navigation.navigate('Settings', {
+                            //     isNotificationOn: isNotificationOn,
+                            //     selectedTime: selectedTime ? selectedTime.toISOString() : null, // Pass the selected time as ISO string or null if not set
+                            // });
                         }}>
                         <View style={styles.doneButtonView}>
                             <Text style={styles.donebuttonText}>Done</Text>

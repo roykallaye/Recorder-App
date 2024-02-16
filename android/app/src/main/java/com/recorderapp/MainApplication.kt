@@ -1,5 +1,8 @@
 package com.recorderapp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.app.Application
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
@@ -11,8 +14,26 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
+import com.google.firebase.FirebaseApp;
 
 class MainApplication : Application(), ReactApplication {
+
+  private fun createNotificationChannel() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channelId = "stress_management_reminders"
+        val channelName = "Stress Management Reminders"
+        val channelDescription = "Notifications for stress management reminders"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+
+        val channel = NotificationChannel(channelId, channelName, importance).apply {
+            description = channelDescription
+        }
+
+        // register the channel with the system
+        val notificationManager: NotificationManager = getSystemService(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(channel)
+    }
+}
 
   override val reactNativeHost: ReactNativeHost =
       object : DefaultReactNativeHost(this) {
@@ -41,5 +62,7 @@ class MainApplication : Application(), ReactApplication {
       load()
     }
     ReactNativeFlipper.initializeFlipper(this, reactNativeHost.reactInstanceManager)
+    FirebaseApp.initializeApp(this)
+    createNotificationChannel()
   }
 }
