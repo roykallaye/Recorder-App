@@ -37,29 +37,29 @@ const Notifications = () => {
     const toggleNotification = async (newState) => {
         setIsNotificationOn(newState);
         if (newState) {
-            // Check and request permissions only if the newState is true (i.e., turning notifications ON)
+            // Before scheduling a new notification, cancel all existing ones
+            notificationService.cancelAllNotifications();
+    
             const permissionGranted = await notificationService.checkAndRequestPermissions();
             if (permissionGranted) {
-                // Only proceed with enabling notifications if permissions are granted
                 await AsyncStorage.setItem('isNotificationOn', 'true');
                 setShowTimePicker(true);
-                // If there's already a selected time, we could directly schedule the notification here as well
                 if (selectedTime) {
-                    // Assuming you have a method to schedule the notification at the selected time
                     notificationService.scheduleNotification(selectedTime.getHours(), selectedTime.getMinutes());
                 }
             } else {
-                // If permission is not granted, do not turn notifications on
                 console.log("Permission not granted for notifications.");
-                setIsNotificationOn(false); // Optionally revert the notification toggle switch to off
-                return; // Exit the function early
+                setIsNotificationOn(false);
+                return;
             }
         } else {
-            // If turning notifications OFF, proceed with your existing logic
             await AsyncStorage.setItem('isNotificationOn', 'false');
             setShowTimePicker(false);
             setSelectedTime(null);
             await AsyncStorage.removeItem('selectedTime');
+    
+            // Also cancel all notifications when turning off
+            notificationService.cancelAllNotifications();
         }
     };    
 
@@ -68,8 +68,13 @@ const Notifications = () => {
         if (selectedDate) {
             setSelectedTime(selectedDate);
             AsyncStorage.setItem('selectedTime', selectedDate.toString());
+    
+            // Cancel any previously scheduled notifications before setting a new one
+            notificationService.cancelAllNotifications();
+            notificationService.scheduleNotification(selectedDate.getHours(), selectedDate.getMinutes());
         }
     };
+    
 
     const displayTimeText = () => selectedTime ? selectedTime.toLocaleTimeString() : 'Select time';
 

@@ -1,6 +1,7 @@
 import PushNotification from 'react-native-push-notification';
 import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
-import { Platform } from 'react-native'; // Import Platform
+import { Platform } from 'react-native';
+import NavigationService from './NavigationService';
 
 class NotificationServices {
   constructor() {
@@ -13,7 +14,7 @@ class NotificationServices {
       soundName: "default",
       importance: 4,
       vibrate: true,
-    }, (created) => console.log(`CreateChannel returned '${created}'`)); // Optional callback
+    }, (created) => console.log(`CreateChannel returned '${created}'`));
 
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
@@ -21,13 +22,17 @@ class NotificationServices {
         console.log("TOKEN:", token);
       },
 
-      // (required) Called when a remote or local notification is opened or received
       onNotification: function(notification) {
-        console.log("NOTIFICATION:", notification);
-        // Process the notification
+          console.log("NOTIFICATION:", notification);
+
+          if (notification.userInteraction) {
+              NavigationService.navigate('Home');
+          }
+
+          // Call this on iOS only
+          //notification.finish(PushNotification.FetchResult.NoData);
       },
 
-      // Should the initial notification be popped automatically
       popInitialNotification: true,
 
       // (optional) default: true
@@ -74,8 +79,14 @@ class NotificationServices {
       date: nextNotification,
       repeatType: 'day',
       channelId: "stress-management-reminders",
+      data: JSON.stringify({ link: 'yourapp://home' }),
     });
   }
+
+  cancelAllNotifications() {
+    PushNotification.cancelAllLocalNotifications();
+  }
+
 }
 
 export const notificationService = new NotificationServices();

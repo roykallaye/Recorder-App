@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: scaleSize(20),
-    top: scaleHeight(240),
+    top: scaleHeight(180),
   },
   buttonText: {
     color: GlobalStyles.backgroundColor,
