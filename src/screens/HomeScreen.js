@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import GlobalStyles from '../constants/GlobalStyles';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // Get device width and height
 const { width, height } = Dimensions.get('window');
@@ -28,65 +29,77 @@ const Home = () => {
         {/* card container */}
         <View style={styles.cardContainer}>
 
-          {/* blue card */}
-          <TouchableOpacity 
-            style={[styles.card, styles.blueCard]}
-            onPress={() => navigation.navigate('SpeakOutSplit')}
-          >
-            <Text style={styles.cardTitle}>Speak out</Text>
-            <Image 
-                source={require('../../assets/speakout.png')}
-                style={styles.imageStyle}
-            />
-            <View style={styles.whiteBackground}>
-             <Text style={styles.cardDuration}>7 min</Text>
+          <View style={styles.cardContainerLeft}>
+            <View style={styles.cardContainerLeft1}>
+              {/* blue card */}
+              <TouchableOpacity 
+                style={[styles.card, styles.blueCard]}
+                onPress={() => navigation.navigate('SpeakOutSplit')}
+              >
+                <Text style={styles.cardTitle}>Speak out</Text>
+                <Image 
+                    source={require('../../assets/speakout.png')}
+                    style={styles.imageStyle}
+                />
+                <View style={styles.whiteBackground}>
+                <Text style={styles.cardDuration}>7 min</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-        </TouchableOpacity>
 
-        {/* purple card */}
-        <TouchableOpacity 
-          style={[styles.card, styles.purpleCard]}
-          onPress={() => navigation.navigate('BoxBreathing')}
-        >
-          <Text style={styles.cardTitle}>Box Breathing</Text>
-          <Image 
-                source={require('../../assets/boxbreathing.png')}
-                style={styles.imageStyle}
-            />
-          <View style={styles.whiteBackground}>
-            <Text style={styles.cardDuration}>4 min</Text>
+            <View style={styles.cardContainerLeft2}>
+              {/* pink card */}
+              <TouchableOpacity 
+                style={[styles.card, styles.pinkCard]}
+                onPress={() => navigation.navigate('NumbersTechnique')}
+              >
+                <Text style={styles.cardTitle}>5-4-3-2-1</Text>
+                <Image 
+                      source={require('../../assets/54321.png')}
+                      style={styles.imageStyle}
+                  />
+                <View style={styles.whiteBackground}>
+                  <Text style={styles.cardDuration}>3 min</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </TouchableOpacity>
 
-        {/* pink card */}
-        <TouchableOpacity 
-          style={[styles.card, styles.pinkCard]}
-          onPress={() => navigation.navigate('NumbersTechnique')}
-        >
-          <Text style={styles.cardTitle}>5-4-3-2-1</Text>
-          <Image 
-                source={require('../../assets/54321.png')}
-                style={styles.imageStyle}
-            />
-          <View style={styles.whiteBackground}>
-            <Text style={styles.cardDuration}>3 min</Text>
-          </View>
-        </TouchableOpacity>
+          <View style={styles.cardContainerRight}>
+            <View style={styles.cardContainerRight1}>
+              {/* purple card */}
+              <TouchableOpacity 
+                style={[styles.card, styles.purpleCard]}
+                onPress={() => navigation.navigate('BoxBreathing')}
+              >
+                <Text style={styles.cardTitle}>Box Breathing</Text>
+                <Image 
+                      source={require('../../assets/boxbreathing.png')}
+                      style={styles.imageStyle}
+                  />
+                <View style={styles.whiteBackground}>
+                  <Text style={styles.cardDuration}>4 min</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
 
-        {/* yellow card */}
-        <TouchableOpacity 
-          style={[styles.card, styles.yellowCard]}
-          onPress={() => navigation.navigate('SingleObject')}
-        >
-          <Text style={styles.cardTitle}>Single Object</Text>
-          <Image 
-                source={require('../../assets/singleobject.png')}
-                style={styles.imageStyle}
-            />
-          <View style={styles.whiteBackground}>
-            <Text style={styles.cardDuration}>2 min</Text>
+            <View style={styles.cardContainerRight2}>
+              {/* yellow card */}
+              <TouchableOpacity 
+                style={[styles.card, styles.yellowCard]}
+                onPress={() => navigation.navigate('SingleObject')}
+              >
+                <Text style={styles.cardTitle}>Single Object</Text>
+                <Image 
+                      source={require('../../assets/singleobject.png')}
+                      style={styles.imageStyle}
+                  />
+                <View style={styles.whiteBackground}>
+                  <Text style={styles.cardDuration}>2 min</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </TouchableOpacity>
         
       </View>
     </SafeAreaView>
@@ -98,59 +111,81 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: GlobalStyles.backgroundColor,
-    padding: GlobalStyles.padding,
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    paddingHorizontal: GlobalStyles.paddingHorizontal,
+    paddingBottom: GlobalStyles.paddingBottom
   },
   headerContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
-    paddingTop: 10,
-    paddingBottom: 25
-  },  
+  },
   greeting: {
     fontSize: GlobalStyles.bigInternalTextFontSize,
     fontWeight: 'bold',
     color: GlobalStyles.directTextColor,
   },
   cardContainer: {
+    flex: 4,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
+  cardContainerLeft: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  cardContainerLeft1: {
+    flex: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  cardContainerLeft2: {
+    flex: 4,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  cardContainerRight: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  cardContainerRight1: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  cardContainerRight2: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
   card: {
-    width: '49%', // Keeps cards responsive across screen sizes
+    width: '98%',
     padding: 15,
     borderRadius: GlobalStyles.borderRadiusMedium,
-    marginBottom: 6,
   },
   blueCard: {
     backgroundColor: GlobalStyles.speakOutColor,
-    height: height * 0.35, // Dynamic height based on screen size
+    height: '98%',
+
   },
   purpleCard: {
     backgroundColor: GlobalStyles.boxBreathingColor,
-    height: height * 0.25, // Dynamic height
-    marginTop: 100,
+    height: '80%',
   },
    pinkCard:{
      backgroundColor: GlobalStyles.numbersTechniqueColor,
-     height: height * 0.25,
-     marginTop: -22
+     height: '75%',
    },
    yellowCard:{
      backgroundColor: GlobalStyles.singleObjectColor,
-     height: height * 0.35,
-     marginTop: 1
+     height: '98%',
    },
    cardTitle: {
     fontSize: GlobalStyles.componentsTextFontSize,
     fontWeight: 'bold',
     color: GlobalStyles.directTextColor,
     alignSelf: 'flex-start',
-    textAlign: 'left',
   },
   cardDuration: {
     fontSize: GlobalStyles.durationTextSize,
@@ -161,19 +196,17 @@ const styles = StyleSheet.create({
   whiteBackground: {
     backgroundColor: GlobalStyles.primaryColor,
     borderRadius: GlobalStyles.borderRadiusSmall,
-    padding: 2,
-    paddingHorizontal: 5,
+    padding: 1,
+    paddingHorizontal: 10,
     alignSelf: 'flex-start',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
     marginTop: 4,
   },
   imageStyle: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 10,
     left: '30%',
-    width: '60%',
-    height: '60%',
+    width: '70%',
+    height: '80%',
     resizeMode: 'contain',
   },
 });

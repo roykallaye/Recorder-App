@@ -76,8 +76,20 @@ const Notifications = () => {
     };
     
 
-    const displayTimeText = () => selectedTime ? selectedTime.toLocaleTimeString() : 'Select time';
-
+    const displayTimeText = () => {
+        if (selectedTime) {
+          let hours = selectedTime.getHours();
+          let minutes = selectedTime.getMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          return `${hours}:${minutes} ${ampm}`;
+        } else {
+          return 'Select time';
+        }
+      };
+      
     return (
         <SafeAreaView style={styles.SafeAreaView}>
             <StatusBar style={GlobalStyles.backgroundColor} />
@@ -225,8 +237,7 @@ const styles = StyleSheet.create({
         right: scaleSize(87.75)
     },
     timePickerButtonView: {
-        alignItems: 'center',
-        borderRadius: 10,
+        
     },
     doneButton: {
         marginTop: scaleSize(20),
