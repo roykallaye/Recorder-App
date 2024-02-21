@@ -39,59 +39,65 @@ const Settings = ({ route, navigation }) => {
     // }, [route.params?.isNotificationOn, route.params?.selectedTime]);
 
     return (
-        <SafeAreaView style={styles.SafeAreaView}>
+        <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={GlobalStyles.backgroundColor} />
 
             {/* header */}
-            <View style={styles.headerView}>
+            <View style={styles.headerContainer}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
                 </TouchableOpacity>
                 <Text style={styles.headerText}>Settings</Text>
             </View>
 
-            {/* notification Settings Tab */}
-            <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.tab}>
-                <Text style={styles.tabText}>Set notifications</Text>
-                <Text style={styles.tab1Status}>{isNotificationOn ? 'ON' : 'OFF'}</Text>
-            </TouchableOpacity>
+            <View style={styles.tabsContainer}>
+                {/* notification Settings Tab */}
+                <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.tab}>
+                    <Text style={styles.tabText}>Set notifications</Text>
+                    <Text style={styles.tab1Status}>{isNotificationOn ? 'ON' : 'OFF'}</Text>
+                </TouchableOpacity>
 
-            <View style={styles.separatorLine} />
+                <View style={styles.separatorLine} />
 
-            {/* other Settings Tab */}
-            <TouchableOpacity onPress={() => navigation.navigate('VideoScreen')} style={styles.tab}>
-                <Text style={styles.tabText}>How it works</Text>
-                <Icon name="chevron-forward-outline" size={GlobalStyles.internalIconSize} color={GlobalStyles.primaryColor} />
-            </TouchableOpacity>
+                {/* other Settings Tab */}
+                <TouchableOpacity onPress={() => navigation.navigate('VideoScreen')} style={styles.tab}>
+                    <Text style={styles.tabText}>How it works</Text>
+                    <Icon name="chevron-forward-outline" size={GlobalStyles.internalIconSize} color={GlobalStyles.primaryColor} />
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    SafeAreaView: {
+    container: {
         flex: 1,
         backgroundColor: GlobalStyles.backgroundColor,
     },
-    headerView: {
+    headerContainer: {
         flexDirection: 'row',
-        paddingLeft: scaleSize(10),
-        paddingTop: scaleSize(20),
-        paddingBottom: scaleSize(20),
+        padding: GlobalStyles.padding,
         alignItems: 'center',
+        justifyContent: 'flex-start',
     },
     headerText: {
         fontSize: scaleFont(GlobalStyles.headerTextFontSize),
         color: GlobalStyles.primaryColor,
         fontWeight: 'bold',
     },
+    tabsContainer: {
+        flex: 1,
+        paddingHorizontal: GlobalStyles.padding,
+
+    },
     tab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: scaleSize(20),
+        paddingVertical: GlobalStyles.padding,
         alignItems: 'center',
     },
     tabText: {
-        color: 'white',
+        color: GlobalStyles.primaryColor,
         fontSize: scaleFont(GlobalStyles.internalTextFontSize),
     },
     tab1Status: {
@@ -101,8 +107,6 @@ const styles = StyleSheet.create({
     separatorLine: {
         borderBottomColor: GlobalStyles.primaryColor,
         borderBottomWidth: 1,
-        marginLeft: scaleSize(20),
-        marginRight: scaleSize(20),
     },
 });
 

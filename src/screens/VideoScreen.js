@@ -17,22 +17,24 @@ const VideoScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style={GlobalStyles.backgroundColor} />
-      <View style={styles.headerView}>
+
+      <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
         <Text style={styles.headerText}>How It Works</Text>
       </View>
 
-      <View style={styles.separatorLine} />
+      
 
       <View style={styles.videoContainer}>
+      <View style={styles.separatorLine} />
         <VideoPlayer
           source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' }}
-          style={styles.video}
           resizeMode="cover"
+          style={styles.video}
           onBack={() => navigation.goBack()}
           onError={(e) => console.log(e)}
         />
@@ -42,16 +44,16 @@ const VideoScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
+  container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: GlobalStyles.backgroundColor,
   },
-  headerView: {
+  headerContainer: {
     flexDirection: 'row',
-    paddingLeft: scaleSize(10),
-    paddingTop: scaleHeight(20),
-    paddingBottom: scaleHeight(20),
+    padding: GlobalStyles.padding,
     alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   headerText: {
     fontSize: scaleFont(GlobalStyles.headerTextFontSize),
@@ -61,28 +63,14 @@ const styles = StyleSheet.create({
   separatorLine: {
     borderBottomColor: GlobalStyles.primaryColor,
     borderBottomWidth: 1,
-    marginLeft: scaleSize(20),
-    marginRight: scaleSize(20),
-  },
-  container: {
-    flex: 1,
-  },
-  header: {
-    fontSize: scaleFont(GlobalStyles.headerTextFontSize),
-    margin: scaleSize(20),
-    color: GlobalStyles.primaryColor,
+    justifyContent: 'flex-start'
   },
   videoContainer: {
     flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: scaleSize(20),
-    marginVertical: scaleHeight(40),
   },
   video: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
     alignItems: 'center',
+    width: '100%'
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

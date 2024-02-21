@@ -91,103 +91,105 @@ const Notifications = () => {
       };
       
     return (
-        <SafeAreaView style={styles.SafeAreaView}>
-            <StatusBar style={GlobalStyles.backgroundColor} />
-
+        <SafeAreaView style={styles.container}>
+            
             {/* header */}
-            <View style={styles.headerView}>
+            <View style={styles.headerContainer}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
                 </TouchableOpacity>
                 <Text style={styles.headerText}>Notifications</Text>
             </View>
-            
-            {/* Toggle and Time Picker Section */}
-            <View style={styles.toggleNotification}>
-                <Text style={styles.toggleNotificationText}>Notification</Text>
-                <View style={styles.toggleButtonsView}>
-                    <TouchableOpacity onPress={() => toggleNotification(true)}>
-                        <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor }}>ON </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => toggleNotification(false)}>
-                        <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.grayOutColor : GlobalStyles.primaryColor }}> OFF</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            {/* Separator line */}
-            <View style={styles.separatorLine} />
-            
-            {/* Description */}
-            <View style={styles.descriptionContainer}>
-                <Text style={{ color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor, fontSize: GlobalStyles.internalTextFontSize, marginTop: 15, textAlign: 'justify' }}>
-                    Customize your stress management routine by setting your preferred time to receive your daily notification.
-                </Text>
-            </View>
-            
-            {/* Select time button */}
-            {isNotificationOn && (
-                <View>
-                    <View style={styles.timePickerView}>
-                        <Text style={styles.timePickerText}>Set notification time</Text>
-                        <TouchableOpacity onPress={() => setShowTimePicker(true)} style={styles.timePickerButtonBorder} >
-                            <Text style={styles.timePickerText}>{displayTimeText()}</Text>
+                
+            <View style={styles.internalContainer}>
+                {/* Toggle */}
+                <View style={styles.tab}>
+                    <Text style={styles.toggleNotificationText}>Notification</Text>
+                    <View style={styles.toggleButtonsView}>
+                        <TouchableOpacity onPress={() => toggleNotification(true)}>
+                            <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor }}>ON </Text>
                         </TouchableOpacity>
-                        {showTimePicker && (
-                            <DateTimePicker
-                                value={selectedTime || new Date()}
-                                mode="time"
-                                display={Platform.OS === 'android' ? 'spinner' : 'default'}
-                                onChange={onTimeChange}
-                                onTouchCancel={() => setShowTimePicker(false)} // For iOS, to handle cancel
-                            />
-                        )}
+                        <TouchableOpacity onPress={() => toggleNotification(false)}>
+                            <Text style={{ fontSize: GlobalStyles.componentsTextFontSize, color: isNotificationOn ? GlobalStyles.grayOutColor : GlobalStyles.primaryColor }}> OFF</Text>
+                        </TouchableOpacity>
                     </View>
-
-                    {/* Done button */}
-                    <TouchableOpacity
-                        style={styles.doneButton}
-                        onPress={async () => {
-                            if (isNotificationOn && selectedTime) {
-                                // Save the notification state as 'ON' and the selected time
-                                await AsyncStorage.setItem('isNotificationOn', 'true');
-                                await AsyncStorage.setItem('selectedTime', selectedTime.toISOString()); // Save the selected time as a string
-                                console.log(selectedTime.toISOString());
-
-                                // Extract hour and minute from selectedTime and schedule the notification
-                                const hour = selectedTime.getHours();
-                                const minute = selectedTime.getMinutes();
-                                console.log('hour:', hour, '    minute:', minute);
-                                notificationService.scheduleNotification(hour, minute);
-                            }
-                            // Navigate back to the Settings screen
-                            navigation.navigate('Settings');
-                            // Optionally pass back the updated state if you plan to use it there
-                            // navigation.navigate('Settings', {
-                            //     isNotificationOn: isNotificationOn,
-                            //     selectedTime: selectedTime ? selectedTime.toISOString() : null, // Pass the selected time as ISO string or null if not set
-                            // });
-                        }}>
-                        <View style={styles.doneButtonView}>
-                            <Text style={styles.donebuttonText}>Done</Text>
-                        </View>
-                    </TouchableOpacity>
                 </View>
-            )}
+
+                {/* Separator line */}
+                <View style={styles.separatorLine} />
+                
+                {/* Description */}
+                    <Text style={{ color: isNotificationOn ? GlobalStyles.primaryColor : GlobalStyles.grayOutColor, fontSize: GlobalStyles.internalTextFontSize, paddingVertical: GlobalStyles.padding, textAlign: 'justify' }}>
+                        Customize your stress management routine by setting your preferred time to receive your daily notification.
+                    </Text>
+                
+                {/* Select time button */}
+                {isNotificationOn && (
+                    <View style={styles.setNotificationContainer}>
+                        <View style={styles.timePickerContainer}>
+                            <Text style={styles.timePickerText}>Set notification time</Text>
+                            <View style={styles.timePickerButton}>
+                                <TouchableOpacity onPress={() => setShowTimePicker(true)} style={styles.timePickerButtonBorder} >
+                                    <Text style={styles.timePickerText}>{displayTimeText()}</Text>
+                                </TouchableOpacity>
+                                {showTimePicker && (
+                                    <DateTimePicker
+                                        value={selectedTime || new Date()}
+                                        mode="time"
+                                        display={Platform.OS === 'android' ? 'spinner' : 'default'}
+                                        onChange={onTimeChange}
+                                        onTouchCancel={() => setShowTimePicker(false)} // For iOS, to handle cancel
+                                    />
+                                )}
+                            </View>
+                        </View>
+
+                        {/* Done button */}
+                        <View style={styles.doneButtonContainer}>
+                            <View style={styles.doneButtonView}>
+                                <TouchableOpacity
+                                    onPress={async () => {
+                                        if (isNotificationOn && selectedTime) {
+                                            // Save the notification state as 'ON' and the selected time
+                                            await AsyncStorage.setItem('isNotificationOn', 'true');
+                                            await AsyncStorage.setItem('selectedTime', selectedTime.toISOString()); // Save the selected time as a string
+                                            console.log(selectedTime.toISOString());
+
+                                            // Extract hour and minute from selectedTime and schedule the notification
+                                            const hour = selectedTime.getHours();
+                                            const minute = selectedTime.getMinutes();
+                                            console.log('hour:', hour, '    minute:', minute);
+                                            notificationService.scheduleNotification(hour, minute);
+                                        }
+                                        // Navigate back to the Settings screen
+                                        navigation.navigate('Settings');
+                                        // Optionally pass back the updated state if you plan to use it there
+                                        // navigation.navigate('Settings', {
+                                        //     isNotificationOn: isNotificationOn,
+                                        //     selectedTime: selectedTime ? selectedTime.toISOString() : null, // Pass the selected time as ISO string or null if not set
+                                        // });
+                                    }}>
+                                    <View>
+                                        <Text style={styles.donebuttonText}>Done</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                )}
+            </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    SafeAreaView: {
+    container: {
         flex: 1,
         backgroundColor: GlobalStyles.backgroundColor,
     },
-    headerView: {
+    headerContainer: {
         flexDirection: 'row',
-        paddingLeft: scaleSize(10),
-        paddingTop: scaleSize(20),
-        paddingBottom: scaleSize(20),
+        padding: GlobalStyles.padding,
         alignItems: 'center',
     },
     headerText: {
@@ -195,15 +197,20 @@ const styles = StyleSheet.create({
         color: GlobalStyles.primaryColor,
         fontWeight: 'bold',
     },
+    internalContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingHorizontal: GlobalStyles.padding,
+    },
+    tab: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: GlobalStyles.padding,
+        alignItems: 'center',
+    },
     toggleNotificationText: {
         color: GlobalStyles.primaryColor,
         fontSize: scaleFont(GlobalStyles.internalTextFontSize),
-    },
-    toggleNotification: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: scaleSize(20),
-        alignItems: 'center',
     },
     toggleButtonsView: {
         flexDirection: 'row',
@@ -211,43 +218,42 @@ const styles = StyleSheet.create({
     separatorLine: {
         borderBottomColor: GlobalStyles.primaryColor,
         borderBottomWidth: 1,
-        marginLeft: scaleSize(20),
-        marginRight: scaleSize(20),
     },
-    descriptionContainer: {
-        padding: scaleSize(20),
+    setNotificationContainer: {
+        flex: 1,
+        paddingBottom: GlobalStyles.padding
     },
-    timePickerView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: scaleSize(20),
+    timePickerContainer: {
+        flex: 1,
+        flexDirection: 'column',
         alignItems: 'center',
+        paddingVertical: GlobalStyles.padding,
     },
     timePickerText: {
         color: GlobalStyles.primaryColor,
-        fontSize: scaleFont(20),
+        fontSize: scaleFont(GlobalStyles.componentsTextFontSize),
+        padding: GlobalStyles.padding
+    },
+    timePickerButton: {
+        flexDirection: 'row',
+        padding: GlobalStyles.padding,
+        alignItems: 'center',
     },
     timePickerButtonBorder: {
         borderColor: GlobalStyles.primaryColor,
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: GlobalStyles.borderRadiusSmall,
-        paddingHorizontal: width * 0.06,
-        paddingVertical: scaleSize(10),
-        top: scaleHeight(50),
-        right: scaleSize(87.75)
     },
-    timePickerButtonView: {
-        
-    },
-    doneButton: {
-        marginTop: scaleSize(20),
-        alignSelf: 'center',
+    doneButtonContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingVertical: GlobalStyles.padding,
     },
     doneButtonView: {
-        marginTop: height * 0.3,
         backgroundColor: GlobalStyles.primaryColor,
-        paddingVertical: scaleSize(10),
-        paddingHorizontal: width * 0.4,
+        width: '100%',
+        paddingVertical: scaleSize(15),
         alignItems: 'center',
         borderRadius: GlobalStyles.borderRadiusSmall,
     },
