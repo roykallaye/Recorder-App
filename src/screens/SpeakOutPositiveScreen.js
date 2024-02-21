@@ -37,22 +37,31 @@ export default function SpeakOutPositive() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
+        
         <Text style={styles.date}>{currentDate}</Text>
+
         <InfoModal
           text="Custom text for this screen"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
       </View>
-      <View style={styles.content}>
+
+      <View style={styles.questionContainer}>
         <Text style={styles.text}>
           {recording ? "I'm listening.." : "What's up today?"}
         </Text>
+      </View>
+
+      <View style={styles.waveformContainer}>
         <DynamicWaveform isRecording={recording} />
+      </View>
+
+      <View style={styles.recorderButtonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleRecording}>
           <Text style={styles.buttonText}>{recording ? "Stop" : "Start Now"}</Text>
           <View style={styles.buttonIcon}>
@@ -60,6 +69,7 @@ export default function SpeakOutPositive() {
           </View>
         </TouchableOpacity>
       </View>
+
     </SafeAreaView>
   );
 }
@@ -69,23 +79,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: GlobalStyles.backgroundColor,
   },
-  header: {
-    height: scaleHeight(60),
+  headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: scaleSize(20),
-    paddingVertical: scaleSize(10),
+    padding: scaleSize(GlobalStyles.paddingHorizontal),
   },
   date: {
     color: GlobalStyles.primaryColor,
     fontSize: scaleFont(GlobalStyles.internalTextFontSize),
     fontWeight: 'bold'
   },
-  content: {
+  questionContainer: {
     flex: 1,
-    paddingHorizontal: scaleSize(20),
-    paddingVertical: scaleHeight(30),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -94,7 +100,16 @@ const styles = StyleSheet.create({
     fontSize: scaleFont(GlobalStyles.recorderScreenText),
     fontWeight: 'bold',
     textAlign: 'left',
-    bottom: scaleHeight(170),
+  },
+  waveformContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  recorderButtonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: GlobalStyles.primaryColor,
@@ -103,13 +118,12 @@ const styles = StyleSheet.create({
     height: scaleSize(100),
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: scaleSize(20),
-    top: scaleHeight(180),
   },
   buttonText: {
-    color: GlobalStyles.backgroundColor,
+    color: GlobalStyles.primaryColor,
     fontSize: scaleFont(GlobalStyles.smallObjectTextSize),
     fontWeight: 'bold',
+    alignItems: 'center',
     bottom: scaleHeight(65),
   },
   buttonIcon: {

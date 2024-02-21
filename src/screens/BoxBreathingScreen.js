@@ -17,10 +17,10 @@ export default function BoxBreathing() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
-      <View style={styles.headerView}>
+    <SafeAreaView style={styles.Container}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back-outline" size={30} color="white" />
+          <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
         <Text style={styles.headerText}>Box breathing</Text>
 
@@ -35,7 +35,9 @@ export default function BoxBreathing() {
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>Box breathing is a simple yet powerful relaxation technique that can help manage stress and improve concentration.</Text>
+        </View>
 
+        <View style={styles.taskContainer}>
           <Text style={styles.taskDetails}><Text style={{fontWeight: 'bold'}}>Inhale. </Text>Breathe in through your nose for four seconds.</Text>
 
           <Text style={styles.taskDetails}><Text style={{fontWeight: 'bold'}}>Hold. </Text>Hold your breath for four seconds.</Text>
@@ -50,14 +52,15 @@ export default function BoxBreathing() {
 }
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
+  Container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     backgroundColor: GlobalStyles.backgroundColor,
   },
-  headerView: {
-    padding: scaleSize(20),
+  headerContainer: {
+    flex: 1,
     flexDirection: 'row',
+    paddingHorizontal: scaleSize(GlobalStyles.paddingHorizontal),
     alignItems: 'center',
   },
   headerText: {
@@ -69,11 +72,11 @@ const styles = StyleSheet.create({
   },
   ScrollView: {
     backgroundColor: GlobalStyles.boxBreathingColor,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: scaleSize(GlobalStyles.borderRadiusLarge),
+    borderTopRightRadius: scaleSize(GlobalStyles.borderRadiusLarge)
   },
   descriptionContainer: {
-    padding: scaleSize(22),
+    padding: scaleSize(GlobalStyles.paddingHorizontal)
   },
   description: {
     color: GlobalStyles.directTextColor,
@@ -81,10 +84,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'justify',
   },
+  taskContainer: {
+    padding: scaleSize(GlobalStyles.paddingHorizontal)
+  },
   taskDetails: {
     color: GlobalStyles.directTextColor,
     fontSize: scaleFont(GlobalStyles.directTaskFontSize),
     textAlign: 'justify',
-    marginBottom: scaleSize(20),
+    paddingBottom: scaleSize(GlobalStyles.padding),
   },
 });

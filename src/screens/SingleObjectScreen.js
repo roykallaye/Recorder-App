@@ -17,8 +17,8 @@ export default function SingleObject() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
-      <View style={styles.headerView}>
+    <SafeAreaView style={styles.Container}>
+      <View style={styles.headerContainer}>
         
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -33,11 +33,13 @@ export default function SingleObject() {
       </View>
 
       <ScrollView style={styles.ScrollView}>
-        <View style={styles.containerView}>
+        <View style={styles.descriptionContainer}>
           <Text style={styles.description}>This exercise involves focusing your attention on a single object through mental visualization.</Text>
 
           <Text style={styles.description}>You will describe the object based on what you imagine seeing visually, feeling through your sense of touch, and even smelling, all in your mind.</Text>
+        </View>
 
+        <View style={styles.taskContainer}>
           <Text style={styles.taskDetails}>Before you begin, take two deep breaths. Breathe in slowly, hold for a moment, and then exhale gently. This will help to calm your mind and sharpen your focus.</Text>
 
           <Text style={styles.taskDetails}>Now, select a small object to be the focus of your attention.</Text>
@@ -60,20 +62,20 @@ export default function SingleObject() {
 }
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
+  Container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     backgroundColor: GlobalStyles.backgroundColor,
   },
-  headerView: {
-    padding: scaleSize(20),
+  headerContainer: {
+    padding: scaleSize(GlobalStyles.paddingHorizontal),
     flexDirection: 'row',
     alignItems: 'center',
   },
   headerText: {
     flex: 1,
     textAlign: 'center',
-    fontSize: scaleFont(26),
+    fontSize: scaleFont(GlobalStyles.headerTextFontSize),
     fontWeight: 'bold',
     color: GlobalStyles.primaryColor,
   },
@@ -82,20 +84,23 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: scaleSize(GlobalStyles.borderRadiusLarge),
     borderTopRightRadius: scaleSize(GlobalStyles.borderRadiusLarge),
   },
-  containerView: {
-    padding: scaleSize(22),
+  descriptionContainer: {
+    padding: scaleSize(GlobalStyles.paddingHorizontal)
   },
   description: {
     color: GlobalStyles.directTextColor,
     fontSize: scaleFont(GlobalStyles.directDescriptionFontSize),
     fontWeight: 'bold',
     textAlign: 'justify',
-    marginBottom: scaleSize(20),
+    paddingBottom: scaleSize(GlobalStyles.padding)
+  },
+  taskContainer: {
+    padding: scaleSize(GlobalStyles.paddingHorizontal)
   },
   taskDetails: {
     color: GlobalStyles.directTextColor,
     fontSize: scaleFont(GlobalStyles.directTaskFontSize),
     textAlign: 'justify',
-    marginBottom: scaleSize(20),
+    paddingBottom: scaleSize(GlobalStyles.padding)
   },
 });

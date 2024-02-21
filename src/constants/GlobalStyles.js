@@ -14,3 +14,12 @@ export const GlobalStyles = StyleSheet.create({
 });
 
 export default GlobalStyles;
+
+
+
+// do a scaleFont, scaleSize, etc functions in a file to call here
+// const scaleSize = (size) => size * (width / 375);
+// const scaleFont = (size) => size * (width / 375);
+// etc.
+// call: fontSize: scaleFont(GlobalStyles.headerTextFontSize)
+// ... ensure usage on all screens

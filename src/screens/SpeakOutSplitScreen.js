@@ -22,32 +22,45 @@ export default function SpeakOutSplit() {
   
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style={GlobalStyles.backgroundColor} />
-      <View style={styles.header}>
+      <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
+
         <InfoModal
         text="Custom text for this screen"
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
       </View>
-      <TouchableOpacity 
-        style={styles.negContainer}
-        onPress={() => navigation.navigate('SpeakOutNegative')}
-      >
-        <Text style={styles.negText}>Speak out your negative thoughts</Text>
-        <Text style={styles.guideText}>Click to Start {'>'}</Text>
-      </TouchableOpacity>
-      <View style={styles.separatorLine} />
-      <TouchableOpacity 
-        style={styles.posContainer}
-        onPress={() => navigation.navigate('SpeakOutPositive')}
-      >
-        <Text style={styles.posText}>Speak out your positive thoughts</Text>
-        <Text style={styles.guideText}>Click to Start {'>'}</Text>
-      </TouchableOpacity>
+
+      <View style={styles.internalContainer}>
+        <View style={styles.negContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SpeakOutNegative')}>
+            <View style={styles.insideContainersUpper}>
+              <Text style={styles.negText}>Speak out your negative thoughts</Text>
+            </View>
+
+            <View style={styles.insideContainersLower}>
+              <Text style={styles.guideText}>Click to Start {'>'}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.separatorLine} />
+
+        <View style={styles.posContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SpeakOutPositive')}>
+            <View style={styles.insideContainersUpper}>
+            <Text style={styles.posText}>Speak out your positive thoughts</Text>
+            </View>
+
+            <View style={styles.insideContainersLower}>
+            <Text style={styles.guideText}>Click to Start {'>'}</Text>
+            </View>
+          </TouchableOpacity>
+          </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -55,46 +68,59 @@ export default function SpeakOutSplit() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalStyles.backgroundColor,
+    flexDirection: 'column',
+    backgroundColor: GlobalStyles.backgroundColor
   },
-  header: {
-    height: scaleHeight(60),
+  headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: scaleSize(20),
-    paddingVertical: scaleSize(10),
+    padding: scaleSize(GlobalStyles.paddingHorizontal)
+  },
+  internalContainer: {
+    flex: 1,
+    flexDirection: 'column'
   },
   negContainer: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
+  },
+  insideContainersUpper: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  insideContainersLower: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   negText: {
     color: GlobalStyles.primaryColor,
     fontSize: scaleFont(GlobalStyles.bigInternalTextFontSize),
-    textAlign: 'center',
-    bottom: scaleHeight(20),
+    textAlign: 'center'
   },
   guideText: {
     color: GlobalStyles.primaryColor,
-    top: scaleHeight(50),
-    textDecorationLine: 'underline',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   separatorLine: {
     borderTopWidth: 1,
-    borderTopColor: GlobalStyles.primaryColor,
+    borderTopColor: GlobalStyles.primaryColor
   },
   posContainer: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: GlobalStyles.speakOutColor,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   posText: {
     color: GlobalStyles.primaryColor,
     fontSize: scaleFont(GlobalStyles.bigInternalTextFontSize),
-    textAlign: 'center',
-    bottom: scaleHeight(20),
-  },
+    textAlign: 'center'
+  }
 });
