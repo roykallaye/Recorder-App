@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
   blueCard: {
     backgroundColor: GlobalStyles.speakOutColor,
     height: '98%',
-
   },
   purpleCard: {
     backgroundColor: GlobalStyles.boxBreathingColor,
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.primaryColor,
     borderRadius: GlobalStyles.borderRadiusSmall,
     padding: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     alignSelf: 'flex-start',
     marginTop: 4,
   },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, StyleSheet, Dimensions, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -43,7 +43,7 @@ const Notifications = () => {
             const permissionGranted = await notificationService.checkAndRequestPermissions();
             if (permissionGranted) {
                 await AsyncStorage.setItem('isNotificationOn', 'true');
-                setShowTimePicker(true);
+                setShowTimePicker(false);
                 if (selectedTime) {
                     notificationService.scheduleNotification(selectedTime.getHours(), selectedTime.getMinutes());
                 }
@@ -69,7 +69,6 @@ const Notifications = () => {
             setSelectedTime(selectedDate);
             AsyncStorage.setItem('selectedTime', selectedDate.toString());
     
-            // Cancel any previously scheduled notifications before setting a new one
             notificationService.cancelAllNotifications();
             notificationService.scheduleNotification(selectedDate.getHours(), selectedDate.getMinutes());
         }
@@ -146,6 +145,7 @@ const Notifications = () => {
 
                         {/* Done button */}
                         <View style={styles.doneButtonContainer}>
+                        {isNotificationOn && selectedTime && (
                             <View style={styles.doneButtonView}>
                                 <TouchableOpacity
                                     onPress={async () => {
@@ -161,7 +161,7 @@ const Notifications = () => {
                                             console.log('hour:', hour, '    minute:', minute);
                                             notificationService.scheduleNotification(hour, minute);
                                         }
-                                        // Navigate back to the Settings screen
+
                                         navigation.navigate('Settings');
                                         // Optionally pass back the updated state if you plan to use it there
                                         // navigation.navigate('Settings', {
@@ -174,6 +174,7 @@ const Notifications = () => {
                                     </View>
                                 </TouchableOpacity>
                             </View>
+                            )}
                         </View>
                     </View>
                 )}

@@ -67,7 +67,7 @@ class NotificationServices {
     const now = new Date();
     const nextNotification = new Date();
 
-    nextNotification.setHours(hour, minute, 0, 0); // Sets the next notification for the specified hour and minute
+    nextNotification.setHours(hour, minute, 0, 0);
 
     // If the time is in the past, set it for the next day
     if (nextNotification <= now) {
@@ -75,11 +75,11 @@ class NotificationServices {
     }
 
     PushNotification.localNotificationSchedule({
-      message: "This is your daily notification reminder.",
+      message: "It's that time of the day. set yourself for relaxation.",
       date: nextNotification,
       repeatType: 'day',
       channelId: "stress-management-reminders",
-      data: JSON.stringify({ link: 'yourapp://home' }),
+      data: JSON.stringify({ link: 'recorderapp://src/screens/homescreen' }),
     });
   }
 
