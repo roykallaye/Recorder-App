@@ -5,10 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import GlobalStyles from '../constants/GlobalStyles';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-// Get device width and height
-const { width, height } = Dimensions.get('window');
 
 const Home = () => {
     const navigation = useNavigation();

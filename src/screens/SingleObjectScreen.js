@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
 
@@ -18,8 +18,9 @@ export default function SingleObject() {
 
   return (
     <SafeAreaView style={styles.Container}>
+
+      {/* header */}
       <View style={styles.headerContainer}>
-        
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
@@ -32,6 +33,7 @@ export default function SingleObject() {
       />
       </View>
 
+      {/* description container */}
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>This exercise involves focusing your attention on a single object through mental visualization.</Text>

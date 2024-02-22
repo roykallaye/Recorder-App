@@ -6,20 +6,17 @@ import { useNavigation } from '@react-navigation/native';
 import VideoPlayer from 'react-native-video-controls';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
-
-const scaleSize = (size) => size * (width / 375);
-const scaleHeight = (size) => size * (height / 667);
 
 const VideoScreen = () => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style={GlobalStyles.backgroundColor} />
 
+      {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -27,10 +24,11 @@ const VideoScreen = () => {
         <Text style={styles.headerText}>How It Works</Text>
       </View>
 
-      
-
-      <View style={styles.videoContainer}>
+      {/* separator */}
       <View style={styles.separatorLine} />
+
+      {/* video container */}
+      <View style={styles.videoContainer}>
         <VideoPlayer
           source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' }}
           resizeMode="cover"
@@ -61,15 +59,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   separatorLine: {
-    borderBottomColor: GlobalStyles.primaryColor,
+    borderColor: GlobalStyles.primaryColor,
     borderBottomWidth: 1,
-    justifyContent: 'flex-start'
+    paddingHorizontal: GlobalStyles.padding,
+    marginHorizontal: GlobalStyles.padding
   },
   videoContainer: {
     flex: 1,
+    borderRadius: GlobalStyles.borderRadiusLarge,
+    padding: GlobalStyles.padding
   },
   video: {
     alignItems: 'center',
+    borderRadius: GlobalStyles.borderRadiusLarge,
     width: '100%'
   },
   overlay: {

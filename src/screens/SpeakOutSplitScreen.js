@@ -6,13 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
 import GlobalStyles from '../constants/GlobalStyles';
 
-// Get device width and height
 const { width, height } = Dimensions.get('window');
 
-// Scale function for font sizes
 const scaleFont = (size) => size * (width / 375);
 
-// Scale function for padding, margins, sizes, and positions
 const scaleSize = (size) => size * (width / 375);
 const scaleHeight = (size) => size * (height / 667); // Based on standard iPhone 6/7/8 height for scaling
 
@@ -22,6 +19,8 @@ export default function SpeakOutSplit() {
   
   return (
     <SafeAreaView style={styles.container}>
+
+      {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -34,7 +33,10 @@ export default function SpeakOutSplit() {
       />
       </View>
 
+      {/* main internal container */}
       <View style={styles.internalContainer}>
+
+        {/* negative container */}
         <View style={styles.negContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('SpeakOutNegative')}>
             <View style={styles.insideContainersUpper}>
@@ -47,8 +49,10 @@ export default function SpeakOutSplit() {
           </TouchableOpacity>
         </View>
 
+        {/* separator */}
         <View style={styles.separatorLine} />
 
+        {/* positive container */}
         <View style={styles.posContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('SpeakOutPositive')}>
             <View style={styles.insideContainersUpper}>

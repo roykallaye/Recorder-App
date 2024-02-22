@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
 
@@ -18,6 +18,8 @@ export default function NumbersTechnique() {
 
   return (
     <SafeAreaView style={styles.Container}>
+
+      {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -31,7 +33,7 @@ export default function NumbersTechnique() {
       />
       </View>
 
-
+      {/* description container */}
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>The 5-4-3-2-1 technique is a powerful method to anchor yourself in the present moment and shift your focus away from sources of anxiety or stress.</Text>

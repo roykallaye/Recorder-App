@@ -37,6 +37,8 @@ export default function SpeakOutPositive() {
 
   return (
     <SafeAreaView style={styles.container}>
+
+      {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -51,16 +53,19 @@ export default function SpeakOutPositive() {
         />
       </View>
 
+      {/* displayed question container */}
       <View style={styles.questionContainer}>
         <Text style={styles.text}>
           {recording ? "I'm listening.." : "What's up today?"}
         </Text>
       </View>
 
+      {/* waveform */}
       <View style={styles.waveformContainer}>
         <DynamicWaveform isRecording={recording} />
       </View>
 
+      {/* recorder button container */}
       <View style={styles.recorderButtonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleRecording}>
           <Text style={styles.buttonText}>{recording ? "Stop" : "Start Now"}</Text>

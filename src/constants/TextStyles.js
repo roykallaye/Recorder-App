@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export const TextStyles = StyleSheet.create({
   fontStyle: 'Arial',
   smallObjectTextSize: 15,
-  directDescriptionFontSize: 26,
-  directTaskFontSize: 23,
+  directDescriptionFontSize: 22,
+  directTaskFontSize: 22,
   componentsTextFontSize: 20,
   headerTextFontSize: 30,
   internalTextFontSize: 20,

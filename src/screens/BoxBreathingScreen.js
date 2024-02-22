@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InfoModal from '../components/infoModal';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
 
@@ -18,6 +18,8 @@ export default function BoxBreathing() {
 
   return (
     <SafeAreaView style={styles.Container}>
+
+      {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
@@ -31,7 +33,7 @@ export default function BoxBreathing() {
       />
       </View>
 
-
+      {/* description container */}
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>Box breathing is a simple yet powerful relaxation technique that can help manage stress and improve concentration.</Text>
@@ -58,9 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.backgroundColor,
   },
   headerContainer: {
-    flex: 1,
     flexDirection: 'row',
-    paddingHorizontal: scaleSize(GlobalStyles.paddingHorizontal),
+    padding: scaleSize(GlobalStyles.paddingHorizontal),
     alignItems: 'center',
   },
   headerText: {

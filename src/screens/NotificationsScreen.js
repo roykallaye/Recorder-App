@@ -8,11 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { notificationService } from '../components/NotificationService';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
 const scaleSize = (size) => size * (width / 375);
-const scaleHeight = (size) => size * (height / 667);
 
 const Notifications = () => {
     const navigation = useNavigation();
@@ -37,7 +36,6 @@ const Notifications = () => {
     const toggleNotification = async (newState) => {
         setIsNotificationOn(newState);
         if (newState) {
-            // Before scheduling a new notification, cancel all existing ones
             notificationService.cancelAllNotifications();
     
             const permissionGranted = await notificationService.checkAndRequestPermissions();
@@ -58,7 +56,6 @@ const Notifications = () => {
             setSelectedTime(null);
             await AsyncStorage.removeItem('selectedTime');
     
-            // Also cancel all notifications when turning off
             notificationService.cancelAllNotifications();
         }
     };    
@@ -81,7 +78,7 @@ const Notifications = () => {
           let minutes = selectedTime.getMinutes();
           const ampm = hours >= 12 ? 'PM' : 'AM';
           hours = hours % 12;
-          hours = hours ? hours : 12; // the hour '0' should be '12'
+          hours = hours ? hours : 12;
           minutes = minutes < 10 ? '0' + minutes : minutes;
           return `${hours}:${minutes} ${ampm}`;
         } else {
@@ -142,7 +139,7 @@ const Notifications = () => {
                                 )}
                             </View>
                         </View>
-
+                        
                         {/* Done button */}
                         <View style={styles.doneButtonContainer}>
                         {isNotificationOn && selectedTime && (
@@ -155,7 +152,7 @@ const Notifications = () => {
                                             await AsyncStorage.setItem('selectedTime', selectedTime.toISOString()); // Save the selected time as a string
                                             console.log(selectedTime.toISOString());
 
-                                            // Extract hour and minute from selectedTime and schedule the notification
+                                            // to reconsider: extract hour and minute from selectedTime and schedule the notification
                                             const hour = selectedTime.getHours();
                                             const minute = selectedTime.getMinutes();
                                             console.log('hour:', hour, '    minute:', minute);
