@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Text, TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import GlobalStyles from '../constants/GlobalStyles';
 
 const { width, height } = Dimensions.get('window');
 
@@ -68,7 +69,7 @@ const InfoModal = ({ text, modalVisible, setModalVisible }) => {
       fontWeight: 'bold'
     },
     rectangularButton: {
-      backgroundColor: '#8790FF',
+      backgroundColor: GlobalStyles.backgroundColor,
       paddingVertical: scaleSize(10),
       paddingHorizontal: scaleSize(20),
       alignItems: 'center',
