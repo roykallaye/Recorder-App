@@ -37,7 +37,11 @@ export default function NumbersTechnique() {
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>The 5-4-3-2-1 technique is a powerful method to anchor yourself in the present moment and shift your focus away from sources of anxiety or stress.</Text>
+          
           <Text style={styles.description}>Start by taking two deep breaths to center yourself. Then, with your eyes closed, mentally imagine yourself doing the following:</Text>
+          
+          {/* separator */}
+          <View style={styles.separatorLine} />
         </View>
 
         <View style={styles.taskContainer}>
@@ -84,6 +88,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'justify',
     paddingBottom: scaleSize(GlobalStyles.padding)
+  },
+  separatorLine: {
+    borderBottomColor: GlobalStyles.primaryColor,
+    borderBottomWidth: 1,
   },
   taskContainer: {
     padding: scaleSize(GlobalStyles.paddingHorizontal)

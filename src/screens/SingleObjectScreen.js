@@ -39,6 +39,9 @@ export default function SingleObject() {
           <Text style={styles.description}>This exercise involves focusing your attention on a single object through mental visualization.</Text>
 
           <Text style={styles.description}>You will describe the object based on what you imagine seeing visually, feeling through your sense of touch, and even smelling, all in your mind.</Text>
+
+          {/* separator */}
+          <View style={styles.separatorLine} />
         </View>
 
         <View style={styles.taskContainer}>
@@ -95,6 +98,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'justify',
     paddingBottom: scaleSize(GlobalStyles.padding)
+  },
+  separatorLine: {
+    borderBottomColor: GlobalStyles.primaryColor,
+    borderBottomWidth: 1,
   },
   taskContainer: {
     padding: scaleSize(GlobalStyles.paddingHorizontal)

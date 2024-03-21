@@ -3,7 +3,7 @@ import { Modal, Text, TouchableOpacity, View, StyleSheet, Dimensions } from 'rea
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import GlobalStyles from '../constants/GlobalStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const scaleFont = (size) => size * (width / 375);
 
@@ -23,7 +23,7 @@ const InfoModal = ({ text, modalVisible, setModalVisible }) => {
           onRequestClose={() => setModalVisible(false)}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={{ color: 'black' }}>{text}</Text>
+              <Text style={styles.InfoModalText}>{text}</Text>
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => setModalVisible(!modalVisible)}>
@@ -74,6 +74,13 @@ const InfoModal = ({ text, modalVisible, setModalVisible }) => {
       paddingHorizontal: scaleSize(20),
       alignItems: 'center',
       borderRadius: scaleSize(10),
+    },
+    InfoModalText: {
+        color: GlobalStyles.directTextColor,
+        fontSize: scaleFont(GlobalStyles.directDescriptionFontSize),
+        fontWeight: 'bold',
+        textAlign: 'justify',
+        paddingBottom: scaleSize(GlobalStyles.padding)
     }
   });  
 

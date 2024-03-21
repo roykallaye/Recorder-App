@@ -37,6 +37,9 @@ export default function BoxBreathing() {
       <ScrollView style={styles.ScrollView}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>Box breathing is a simple yet powerful relaxation technique that can help manage stress and improve concentration.</Text>
+          
+          {/* separator */}
+          <View style={styles.separatorLine} />
         </View>
 
         <View style={styles.taskContainer}>
@@ -84,6 +87,11 @@ const styles = StyleSheet.create({
     fontSize: scaleFont(GlobalStyles.directDescriptionFontSize),
     fontWeight: 'bold',
     textAlign: 'justify',
+    paddingBottom: scaleSize(GlobalStyles.padding)
+  },
+  separatorLine: {
+    borderBottomColor: GlobalStyles.primaryColor,
+    borderBottomWidth: 1,
   },
   taskContainer: {
     padding: scaleSize(GlobalStyles.paddingHorizontal)

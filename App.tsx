@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     if (Platform.OS === 'android')
     SplashScreen.hide();
-  }, [])
+  }, []);
 
   return (
     <NavigationContainer ref={navigationRef}>
