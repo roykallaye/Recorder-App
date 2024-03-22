@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     color: GlobalStyles.primaryColor,
   },
   ScrollView: {
-    backgroundColor: GlobalStyles.numbersTechniqueColor,
+    backgroundColor: GlobalStyles.primaryColor,
     borderTopLeftRadius: scaleSize(GlobalStyles.borderRadiusLarge),
     borderTopRightRadius: scaleSize(GlobalStyles.borderRadiusLarge),
   },
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     paddingBottom: scaleSize(GlobalStyles.padding)
   },
   separatorLine: {
-    borderBottomColor: GlobalStyles.primaryColor,
+    borderBottomColor: GlobalStyles.backgroundColor,
     borderBottomWidth: 1,
   },
   taskContainer: {

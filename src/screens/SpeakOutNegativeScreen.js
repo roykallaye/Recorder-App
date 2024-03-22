@@ -55,7 +55,7 @@ export default function SpeakOutNegative() {
       {/* displayed question container */}
       <View style={styles.questionContainer}>
         <Text style={styles.text}>
-          {recording ? "I hear you.." : "What's on your mind?"}
+        What were three negative thoughts you had in the last 24 hours?
         </Text>
       </View>
 
@@ -91,13 +91,14 @@ const styles = StyleSheet.create({
   },
   date: {
     color: GlobalStyles.primaryColor,
-    fontSize: scaleFont(GlobalStyles.internalTextFontSize),
+    fontSize: scaleFont(GlobalStyles.headerTextFontSize),
     fontWeight: 'bold'
   },
   questionContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: GlobalStyles.padding
   },
   text: {
     color: GlobalStyles.directTextColor,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: GlobalStyles.padding
   },
   recorderButtonContainer: {
     flex: 1,

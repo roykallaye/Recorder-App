@@ -56,7 +56,7 @@ export default function SpeakOutPositive() {
       {/* displayed question container */}
       <View style={styles.questionContainer}>
         <Text style={styles.text}>
-          {recording ? "I'm listening.." : "What's up today?"}
+        What were three positive thoughts you had in the last 24 hours?
         </Text>
       </View>
 
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: GlobalStyles.padding
   },
   text: {
     color: GlobalStyles.directTextColor,
