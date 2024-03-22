@@ -6,7 +6,7 @@ export const TextStyles = StyleSheet.create({
   directDescriptionFontSize: 20,
   directTaskFontSize: 18,
   componentsTextFontSize: 20,
-  headerTextFontSize: 30,
+  headerTextFontSize: 26,
   internalTextFontSize: 20,
   recorderScreenText: 32,
   bigInternalTextFontSize: 40,

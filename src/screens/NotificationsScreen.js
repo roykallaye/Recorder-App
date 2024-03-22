@@ -143,7 +143,7 @@ const Notifications = () => {
                         {/* Done button */}
                         <View style={styles.doneButtonContainer}>
                         {isNotificationOn && selectedTime && (
-                            <View style={styles.doneButtonView}>
+                            
                                 <TouchableOpacity
                                     onPress={async () => {
                                         if (isNotificationOn && selectedTime) {
@@ -156,7 +156,7 @@ const Notifications = () => {
                                             const hour = selectedTime.getHours();
                                             const minute = selectedTime.getMinutes();
                                             console.log('hour:', hour, '    minute:', minute);
-                                            notificationService.scheduleNotification(hour, minute);
+                                            //notificationService.scheduleNotification(hour, minute);
                                         }
 
                                         navigation.navigate('Settings');
@@ -166,11 +166,12 @@ const Notifications = () => {
                                         //     selectedTime: selectedTime ? selectedTime.toISOString() : null, // Pass the selected time as ISO string or null if not set
                                         // });
                                     }}>
+                                    <View style={styles.doneButtonView}>
                                     <View>
                                         <Text style={styles.donebuttonText}>Done</Text>
                                     </View>
+                                    </View>
                                 </TouchableOpacity>
-                            </View>
                             )}
                         </View>
                     </View>
@@ -244,13 +245,11 @@ const styles = StyleSheet.create({
     },
     doneButtonContainer: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'flex-end',
         paddingVertical: GlobalStyles.padding,
     },
     doneButtonView: {
         backgroundColor: GlobalStyles.primaryColor,
-        width: '100%',
         paddingVertical: scaleSize(15),
         alignItems: 'center',
         borderRadius: GlobalStyles.borderRadiusSmall,

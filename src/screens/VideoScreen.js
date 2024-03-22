@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import VideoPlayer from 'react-native-video-controls';
+import { WebView } from 'react-native-webview';
 import GlobalStyles from '../constants/GlobalStyles';
 
 const { width } = Dimensions.get('window');
@@ -29,12 +29,9 @@ const VideoScreen = () => {
 
       {/* video container */}
       <View style={styles.videoContainer}>
-        <VideoPlayer
-          source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' }}
-          resizeMode="cover"
+        <WebView
+          source={{ uri: 'https://customer-l9k8ksax2dn0u08o.cloudflarestream.com/7afdbd9b43dfa92721b596a1fd523cfb/iframe?poster=https%3A%2F%2Fcustomer-l9k8ksax2dn0u08o.cloudflarestream.com%2F7afdbd9b43dfa92721b596a1fd523cfb%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600' }}
           style={styles.video}
-          onBack={() => navigation.goBack()}
-          onError={(e) => console.log(e)}
         />
       </View>
     </SafeAreaView>
@@ -67,12 +64,12 @@ const styles = StyleSheet.create({
   videoContainer: {
     flex: 1,
     borderRadius: GlobalStyles.borderRadiusLarge,
-    padding: GlobalStyles.padding
+    padding: GlobalStyles.padding,
+    paddingVertical: GlobalStyles.paddingVertical 
   },
   video: {
     alignItems: 'center',
     borderRadius: GlobalStyles.borderRadiusLarge,
-    width: '100%'
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

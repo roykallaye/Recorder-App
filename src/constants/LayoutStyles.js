@@ -5,6 +5,7 @@ export const LayoutStyles = StyleSheet.create({
   borderRadiusMedium: 10,
   borderRadiusSmall: 5,
   padding: 20,
+  paddingVertical: 26,
   paddingHorizontal: 20,
   paddingBottom: 40
 });
