@@ -38,10 +38,7 @@ export default function NumbersTechnique() {
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>The 5-4-3-2-1 technique is a powerful method to anchor yourself in the present moment and shift your focus away from sources of anxiety or stress.</Text>
           
-          <Text style={styles.description}>Start by taking two deep breaths to center yourself. Then, with your eyes closed, mentally imagine yourself doing the following:</Text>
-          
-          {/* separator */}
-          <View style={styles.separatorLine} />
+          <Text style={styles.description2}>Start by taking two deep breaths to center yourself. Then, with your eyes closed, mentally imagine yourself doing the following:</Text>
         </View>
 
         <View style={styles.taskContainer}>
@@ -85,21 +82,18 @@ const styles = StyleSheet.create({
   description: {
     color: GlobalStyles.directTextColor,
     fontSize: scaleFont(GlobalStyles.directDescriptionFontSize),
-    fontWeight: 'bold',
-    textAlign: 'justify',
     paddingBottom: scaleSize(GlobalStyles.padding)
   },
-  separatorLine: {
-    borderBottomColor: GlobalStyles.backgroundColor,
-    borderBottomWidth: 1,
+  description2: {
+    color: GlobalStyles.directTextColor,
+    fontSize: scaleFont(GlobalStyles.directTaskFontSize),
   },
   taskContainer: {
-    padding: scaleSize(GlobalStyles.paddingHorizontal)
+    paddingHorizontal: scaleSize(GlobalStyles.paddingHorizontal)
   },
   taskDetails: {
     color: GlobalStyles.directTextColor,
     fontSize: scaleFont(GlobalStyles.directTaskFontSize),
-    textAlign: 'justify',
     paddingBottom: scaleSize(GlobalStyles.padding),
   },
 });

@@ -1,9 +1,10 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
+import VideoThumbnail from '../../assets/VideoThumbnail.png'; // Ensure this path matches your file structure
 import GlobalStyles from '../constants/GlobalStyles';
 
 const { width } = Dimensions.get('window');
@@ -12,10 +13,10 @@ const scaleFont = (size) => size * (width / 375);
 
 const VideoScreen = () => {
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-
       {/* header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -29,9 +30,18 @@ const VideoScreen = () => {
 
       {/* video container */}
       <View style={styles.videoContainer}>
+        {isLoading && (
+          <Image source={VideoThumbnail} style={styles.video} resizeMode="cover" />
+        )}
+        {isLoading && (
+          <View style={styles.overlay}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
         <WebView
           source={{ uri: 'https://customer-l9k8ksax2dn0u08o.cloudflarestream.com/7afdbd9b43dfa92721b596a1fd523cfb/iframe?poster=https%3A%2F%2Fcustomer-l9k8ksax2dn0u08o.cloudflarestream.com%2F7afdbd9b43dfa92721b596a1fd523cfb%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600' }}
-          style={styles.video}
+          style={[styles.video, isLoading ? { display: 'none' } : {}]}
+          onLoad={() => setIsLoading(false)}
         />
       </View>
     </SafeAreaView>
@@ -70,6 +80,8 @@ const styles = StyleSheet.create({
   video: {
     alignItems: 'center',
     borderRadius: GlobalStyles.borderRadiusLarge,
+    width: '100%',
+    height: '100%',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
