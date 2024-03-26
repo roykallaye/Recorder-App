@@ -53,7 +53,7 @@ const Settings = ({ route, navigation }) => {
             <View style={styles.tabsContainer}>
                 {/* notification Settings Tab */}
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={styles.tab}>
-                    <Text style={styles.tabText}>Set notifications</Text>
+                    <Text style={styles.tabText}>Set Notifications</Text>
                     <Text style={styles.tab1Status}>{isNotificationOn ? 'ON' : 'OFF'}</Text>
                 </TouchableOpacity>
 
@@ -61,7 +61,7 @@ const Settings = ({ route, navigation }) => {
 
                 {/* other Settings Tab */}
                 <TouchableOpacity onPress={() => navigation.navigate('VideoScreen')} style={styles.tab}>
-                    <Text style={styles.tabText}>How it works</Text>
+                    <Text style={styles.tabText}>How Speak Out Works</Text>
                     <Icon name="chevron-forward-outline" size={GlobalStyles.internalIconSize} color={GlobalStyles.primaryColor} />
                 </TouchableOpacity>
             </View>

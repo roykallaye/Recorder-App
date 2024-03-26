@@ -46,10 +46,11 @@ export default function SpeakOutNegative() {
         <Text style={styles.date}>{currentDate}</Text>
 
         <InfoModal
-          text="Custom text for this screen"
+          text={`**Reflecting on Negative Thoughts**\n\nThis prompt encourages you to identify and voice out up to three negative thoughts you've had in the past day. Recognizing these thoughts is the first step in a mindful approach to understanding your patterns of thinking that may affect your well-being.\n\n- Simply press the 'Start Now' button and use the microphone to record your thoughts. This can help you externalize what's on your mind and may bring clarity.\n\n- Remember, this is a personal tool for your reflection. No one else will hear these recordings unless you choose to share them.\n\n- If you're finding it difficult to articulate your thoughts, take a moment to breathe deeply and let your thoughts flow naturally. There's no right or wrong here, only your honest feelings.`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
+
       </View>
 
       {/* displayed question container */}
