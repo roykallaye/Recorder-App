@@ -44,43 +44,36 @@ const InfoModal = ({ text, modalVisible, setModalVisible }) => {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      padding: GlobalStyles.padding
     },
     modalView: {
-      margin: scaleSize(20),
-      backgroundColor: 'white',
-      borderRadius: scaleSize(20),
-      padding: scaleSize(35),
-      alignItems: 'center',
+      backgroundColor: GlobalStyles.primaryColor,
+      borderRadius: scaleSize(GlobalStyles.borderRadiusLarge),
+      padding: scaleSize(GlobalStyles.padding),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: scaleSize(2)
       },
       shadowOpacity: 0.25,
-      shadowRadius: scaleSize(4),
       elevation: 5
-    },
-    button: {
-      marginTop: scaleSize(15),
     },
     hideButtonText: {
       color: 'white',
-      fontSize: scaleFont(20),
+      fontSize: scaleFont(GlobalStyles.internalTextFontSize),
       fontWeight: 'bold'
     },
     rectangularButton: {
       backgroundColor: GlobalStyles.backgroundColor,
-      paddingVertical: scaleSize(10),
-      paddingHorizontal: scaleSize(20),
+      paddingVertical: scaleSize(15),
+      paddingHorizontal: scaleSize(GlobalStyles.paddingHorizontal),
       alignItems: 'center',
-      borderRadius: scaleSize(10),
+      borderRadius: GlobalStyles.borderRadiusSmall,
     },
     InfoModalText: {
         color: GlobalStyles.directTextColor,
         fontSize: scaleFont(GlobalStyles.directDescriptionFontSize),
-        fontWeight: 'bold',
         textAlign: 'justify',
-        paddingBottom: scaleSize(GlobalStyles.padding)
     }
   });  
 

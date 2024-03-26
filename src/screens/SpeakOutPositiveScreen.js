@@ -47,7 +47,7 @@ export default function SpeakOutPositive() {
         <Text style={styles.date}>{currentDate}</Text>
 
         <InfoModal
-          text={`**Embracing Positive Thoughts**\n\nThis screen is an opportunity for you to recall and express up to three positive thoughts or moments you experienced in the last day. Acknowledging the positive can enhance your mood and perspective.\n\n- Tap the 'Start Now' button and use the microphone to record your positive thoughts. This practice can be a powerful way to reinforce positivity in your daily life.\n\n- Your recordings are private and a chance for you to affirm the good in your life. Feel free to speak freely and celebrate small wins or moments of gratitude.\n\n- If it's challenging to think of positive thoughts, start simple. Even everyday comforts or a moment of peace can be worth noting. This is your space to recognize the joy in your life.`}
+          text={`Embracing Positive Thoughts\n\nThis screen is an opportunity for you to recall and express up to three positive thoughts or moments you experienced in the last day. Acknowledging the positive can enhance your mood and perspective.\n\n- Tap the 'Start Now' button and use the microphone to record your positive thoughts. This practice can be a powerful way to reinforce positivity in your daily life.\n\n- Your recordings are private and a chance for you to affirm the good in your life. Feel free to speak freely and celebrate small wins or moments of gratitude.\n\n- If it's challenging to think of positive thoughts, start simple. Even everyday comforts or a moment of peace can be worth noting. This is your space to recognize the joy in your life.`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
