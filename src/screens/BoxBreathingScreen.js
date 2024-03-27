@@ -27,7 +27,7 @@ export default function BoxBreathing() {
         <Text style={styles.headerText}>Box breathing</Text>
 
         <InfoModal
-          text={`Box Breathing Technique\n\nBox breathing, also known as square breathing, is a simple but effective technique used to regain calm and focus. It's often used by athletes, police officers, and military personnel to reduce stress in challenging situations.\n\n- Inhale: Breathing in through your nose for four seconds allows you to take in oxygen steadily and prepare for a brief pause.\n\n- Hold: Pausing your breath for four seconds enables the oxygen to circulate throughout your bloodstream.\n\n- Exhale: Releasing the breath slowly through your mouth over four seconds helps to expel carbon dioxide and relaxes the mind and body.\n\n- Hold Again: Another pause for four seconds after exhaling helps regulate the breathing cycle and prepares you for the next breath.\n\nThis breathing exercise can be performed several times in a row to help calm nerves and improve focus. Use this tool anytime you feel stressed or need to concentrate.`}
+          text={`Box Breathing Technique\n\nBox breathing is a technique for regaining calm and focus, used in high-stress professions. It involves a cycle of inhaling through the nose for four seconds, holding the breath for four, exhaling slowly through the mouth for four, and holding again for four. This cycle, repeated several times, helps calm nerves and improves focus. It's an effective tool for stress relief and concentration.\n\nTap 'Watch Now' for a brief introduction to Fresh Soul and begin capturing your thoughts with ease.`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />

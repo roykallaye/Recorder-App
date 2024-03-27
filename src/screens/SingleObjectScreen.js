@@ -27,7 +27,7 @@ export default function SingleObject() {
         <Text style={styles.headerText}>Single Object</Text>
 
         <InfoModal
-          text={`Single Object Focus Exercise\n\nThis meditative exercise is designed to enhance mindfulness by directing your full attention to visualizing a single object. By engaging multiple senses in your imagination, you can deepen concentration and mindfulness.\n\n- Begin by centering yourself with two deep breaths to prepare your mind.\n\n- Choose an object to visualize and mentally note its details: shape, color, texture, and any sensations you associate with it.\n\n- Contemplate how light might play on its surface, its temperature, and even a scent it might have.\n\n- The goal is not to simply think about the object but to explore it with your mind’s eye as if it were right in front of you, using all of your senses.\n\nThis technique can be a calming practice, perfect for moments when you need to ground yourself and find focus.`}
+          text={`Single Object Focus Exercise\n\nEnhance your mindfulness with this exercise by fully focusing on visualizing one object. Use deep breaths to center yourself, then pick an object to visualize in detail—its shape, color, texture, and any associated sensations. Imagine the light on it, its temperature, and scent, exploring it with all your senses. This practice helps calm and focus your mind.\n\nTap 'Watch Now' for a brief introduction to Fresh Soul and begin capturing your thoughts with ease.`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />

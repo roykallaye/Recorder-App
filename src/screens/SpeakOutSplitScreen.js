@@ -27,7 +27,7 @@ export default function SpeakOutSplit() {
         </TouchableOpacity>
 
         <InfoModal
-          text={`Speak Out Your Thoughts\n\nWatch the video habibi 😘`}
+          text={`Speak Out Your Thoughts\n\nTap 'Watch Now' for an introduction to Fresh Soul and begin capturing your thoughts with ease.`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
