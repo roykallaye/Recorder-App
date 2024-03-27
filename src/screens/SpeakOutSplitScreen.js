@@ -27,7 +27,7 @@ export default function SpeakOutSplit() {
         </TouchableOpacity>
 
         <InfoModal
-          text={`Understanding Your Thoughts\n\nThis screen is designed to help you reflect on your thoughts and emotions. By clicking on the buttons provided, you can either express any negative thoughts that may be troubling you or share positive thoughts that bring you joy and comfort. This exercise is intended to promote mindfulness and self-awareness, which are key components of mental health.\n\n- Speak Out Your Negative Thoughts: Use this feature to articulate and acknowledge your worries or challenges. It’s a step toward understanding and managing your feelings.\n\n- Speak Out Your Positive Thoughts: This feature allows you to focus on and reinforce the good experiences and happy moments in your life, helping you cultivate a positive mindset.\n\nRemember, both positive and negative thoughts are natural parts of our mental landscape. This tool aims to balance self-expression and foster emotional well-being.`}
+          text={`Speak Out Your Thoughts\n\nWatch the video habibi 😘`}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />

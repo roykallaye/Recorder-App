@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     timePickerButtonBorder: {
         borderColor: GlobalStyles.primaryColor,
         borderWidth: 2,
-        borderRadius: GlobalStyles.borderRadiusSmall,
+        borderRadius: GlobalStyles.borderRadiusLarge,
     },
     doneButtonContainer: {
         flex: 1,
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalStyles.primaryColor,
         paddingVertical: scaleSize(15),
         alignItems: 'center',
-        borderRadius: GlobalStyles.borderRadiusSmall,
+        borderRadius: GlobalStyles.borderRadiusLarge,
     },
     donebuttonText: {
         color: GlobalStyles.backgroundColor,

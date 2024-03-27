@@ -16,7 +16,7 @@ const Home = () => {
 
         {/* header container */}
         <View style={styles.headerContainer}>
-          <Text style={styles.greeting}>Welcome,</Text>
+          <Text style={styles.greeting}>Welcome..</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
             <Feather name="settings" size={GlobalStyles.externalIconSize} color="white" />
           </TouchableOpacity>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   card: {
     width: '98%',
     padding: 15,
-    borderRadius: GlobalStyles.borderRadiusMedium,
+    borderRadius: GlobalStyles.borderRadiusLarge,
   },
   blueCard: {
     backgroundColor: GlobalStyles.speakOutColor,
