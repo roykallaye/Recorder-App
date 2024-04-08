@@ -16,7 +16,7 @@ const InfoModal = ({ text, modalVisible, setModalVisible }) => {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Ionicons name="information-circle-outline" size={GlobalStyles.externalIconSize} color="white" />
+          <Ionicons name="information-circle-outline" size={GlobalStyles.externalIconSize} color={GlobalStyles.primaryColor} />
         </TouchableOpacity>
 
         <Modal

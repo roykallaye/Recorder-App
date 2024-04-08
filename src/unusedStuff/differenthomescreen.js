@@ -61,19 +61,16 @@ const Home = () => {
             </View>
 
             <View style={styles.cardContainerLeft3}>
-              {/* yellow card */}
+              {/* pink card */}
               <TouchableOpacity 
-                style={[styles.card, styles.yellowCard]}
-                onPress={() => navigation.navigate('SingleObject')}
+                style={[styles.card, styles.greenCard]}
+                onPress={() => navigation.navigate('TheUltimateExercise')}
               >
-                <Text style={styles.cardTitle}>Single Object</Text>
+                <Text style={styles.cardTitle}>The Ultimate Exercise</Text>
                 <Image 
-                      source={require('../../assets/singleobject.png')}
+                      source={require('../../assets/theultimateexercise.png')}
                       style={styles.imageStyle}
                   />
-                <View style={styles.whiteBackground}>
-                  <Text style={styles.cardDuration}>2 min</Text>
-                </View>
               </TouchableOpacity>
             </View>
           </View>
@@ -97,16 +94,19 @@ const Home = () => {
             </View>
 
             <View style={styles.cardContainerRight2}>
-              {/* green card */}
+              {/* yellow card */}
               <TouchableOpacity 
-                style={[styles.card, styles.greenCard]}
-                onPress={() => navigation.navigate('TheUltimateExercise')}
+                style={[styles.card, styles.yellowCard]}
+                onPress={() => navigation.navigate('SingleObject')}
               >
-                <Text style={styles.cardTitle}>The Ultimate Exercise</Text>
+                <Text style={styles.cardTitle}>Single Object</Text>
                 <Image 
-                      source={require('../../assets/theultimateexercise.png')}
+                      source={require('../../assets/singleobject.png')}
                       style={styles.imageStyle}
                   />
+                <View style={styles.whiteBackground}>
+                  <Text style={styles.cardDuration}>2 min</Text>
+                </View>
               </TouchableOpacity>
             </View>
           </View>
@@ -149,16 +149,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    backgroundColor: 'tomato'
   },
   cardContainerLeft2: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    backgroundColor: 'pink'
   },
   cardContainerLeft3: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    backgroundColor: 'black'
   },
   cardContainerRight: {
     flex: 1,
@@ -171,8 +174,8 @@ const styles = StyleSheet.create({
   },
   cardContainerRight2: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
   },
   card: {
     width: '98%',
@@ -185,8 +188,7 @@ const styles = StyleSheet.create({
   },
   purpleCard: {
     backgroundColor: GlobalStyles.boxBreathingColor,
-    height: '70%',
-    marginBottom: 5
+    height: '80%',
   },
    pinkCard:{
      backgroundColor: GlobalStyles.numbersTechniqueColor,
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
    },
    greenCard:{
     backgroundColor:'#E7FFCE',
-    height: '90%',
+    height: '98%',
   },
    yellowCard:{
      backgroundColor: GlobalStyles.singleObjectColor,

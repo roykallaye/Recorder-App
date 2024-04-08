@@ -8,6 +8,7 @@ import SpeakOutSplit from './src/screens/SpeakOutSplitScreen';
 import BoxBreathing from './src/screens/BoxBreathingScreen';
 import NumbersTechnique from './src/screens/NumbersTechniqueScreen';
 import SingleObject from './src/screens/SingleObjectScreen';
+import TheUltimateExercise from './src/screens/TheUltimateExercise';
 import SpeakOutPositive from './src/screens/SpeakOutPositiveScreen';
 import SpeakOutNegative from './src/screens/SpeakOutNegativeScreen';
 import Settings from './src/screens/SettingsScreen';
@@ -38,6 +39,7 @@ function App() {
         <Stack.Screen name="BoxBreathing" component={BoxBreathing} />
         <Stack.Screen name="NumbersTechnique" component={NumbersTechnique} />
         <Stack.Screen name="SingleObject" component={SingleObject} />
+        <Stack.Screen name="TheUltimateExercise" component={TheUltimateExercise}/>
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Notifications" component={Notifications}/>
         <Stack.Screen name="VideoScreen" component={VideoScreen}/>
